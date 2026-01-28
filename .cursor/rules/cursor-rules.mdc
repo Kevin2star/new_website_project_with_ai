@@ -1,0 +1,26 @@
+---
+description: Baseline rules for how to read/apply this project's Cursor rule files (.mdc).
+globs: "*.mdc"
+alwaysApply: true
+---
+
+# Cursor Rules 운영 원칙
+
+- 이 프로젝트의 단일 소스 오브 트루스는 **PRD(@/PRD.md)** 와 **FLOW(@/FLOW.md)** 이다.
+- 기능/페이지/데이터 흐름 변경이 필요한 경우, 먼저 PRD/FLOW를 업데이트한 뒤 코드를 변경한다. (코드가 PRD/FLOW를 앞서가면 안 됨)
+- 규칙 파일이 서로 충돌하면 우선순위는 다음과 같다:
+  1) `01-prd-flow.mdc` (제품 요구사항/사용자 흐름)
+  2) `02-style-ui.mdc` (UI/스타일)
+  3) `03-standards.mdc` (엔지니어링 표준)
+
+# 작업 시 기본 체크리스트 (항상)
+
+- 지금 구현/수정하려는 내용이 PRD Phase 1 범위인지 확인한다.
+- 사용자의 핵심 여정(로그인 → 제품 탐색 → 상세 → 문의 작성 → AI 응답 확인/저장 → 마이페이지 목록/삭제)을 깨지 않는지 확인한다.
+- API/DB 변경이 있다면 RLS/권한/에러 처리까지 함께 고려한다.
+- 사용자에게 보이는 상태 변화는 로딩/에러/빈 상태가 반드시 존재해야 한다.
+
+# 파일 참조
+
+- PRD: @/PRD.md
+- FLOW(Sequence/Flowchart): @/FLOW.md

@@ -1,0 +1,67 @@
+---
+description: Phase 1 MVP의 PRD 및 사용자 흐름(FLOW)을 절대 준수하기 위한 규칙.
+alwaysApply: true
+---
+
+# Phase 1 범위 고정 (스코프 락)
+
+- Phase 1은 “끝까지 이어지는 사용자 흐름을 구현한 MVP”가 목표다.
+- 아래 항목은 **반드시 포함**:
+  - Google Social Login 단일 방식
+  - 제품: 리스트/상세 **읽기 전용**
+  - 문의: 작성, 내 문의 목록, 삭제
+  - AI: 문의 텍스트 기반 응답 생성 + Inquiry에 저장
+- 아래 항목은 **Phase 1에서 금지** (PRD 제외):
+  - 이메일/비밀번호 로그인, 관리자 권한 분기/대시보드, 실시간 채팅, 파일 업로드, 제품 비교/추천 고도화, 문의 상태관리
+
+# 사용자 여정(페이지/네비게이션) 불변
+
+FLOW 기준으로 다음 페이지 이동만 허용한다. (동선 추가/변경 금지)
+
+- `/` 메인: 서비스 소개 + 제품 리스트 이동 CTA + 로그인 CTA
+- `/login`: Google OAuth 로그인
+- `/products`: 제품 리스트(카드)
+- `/products/:id`: 제품 상세 + “문의하기”
+- `/inquiry?product=:id`: 문의 작성 + AI 응답 표시
+- `/my-page`: 내 문의 목록 + 삭제
+
+허용 네비게이션(요약):
+- `/` → `/products` or `/login`
+- `/products` → `/products/:id` → `/inquiry?product=:id` → `/my-page`
+- `/products` → `/my-page` (로그인 사용자만)
+
+# 핵심 로직 흐름(Sequence) 고정
+
+문의 작성 플로우는 반드시 아래 순서를 지킨다:
+
+1) Inquiry를 먼저 DB에 INSERT (ai_response = null)
+2) AI Provider 호출 (content + product context)
+3) 동일 Inquiry 레코드를 UPDATE하여 ai_response 저장
+4) 사용자에게 “AI 응답 + 저장 완료” 상태를 보여준다
+
+주의:
+- AI 응답 생성에 실패하면, Inquiry는 생성되어 있어도 된다.
+  - 이 경우 UI에 실패 상태를 보여주고, 재시도(같은 inquiry_id 업데이트)로 복구 가능해야 한다.
+
+# 데이터 모델(Phase 1) 고정
+
+- users: google_id/email/name 기반 upsert
+- products: read-only
+- inquiries: user_id, product_id, content, ai_response, created_at
+
+규칙:
+- inquiries는 **반드시 본인(user_id)의 것만** 조회/삭제 가능해야 한다. (RLS 또는 서버 사이드 체크)
+- product_id는 반드시 products에 존재하는 값이어야 한다.
+
+# API/서버 액션 책임 분리
+
+- products.read: DB read-only
+- inquiry.create: DB write (insert)
+- ai.generate: 외부 AI 호출 (OpenAI/Gemini)
+- inquiry.update(ai_response 저장): DB write (update)
+- inquiry.list/delete: 본인 데이터만
+
+# 데모 기준(Phase 1)
+
+- “로그인 → 제품 1개 선택 → 문의 1개 작성 → AI 응답 생성/저장 → 마이페이지에서 목록 확인/삭제”
+  이 시나리오를 5분 내에 안정적으로 시연 가능해야 한다.
