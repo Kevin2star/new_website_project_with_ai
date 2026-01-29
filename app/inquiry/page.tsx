@@ -1,6 +1,20 @@
 import { Suspense } from "react";
 
-export default function InquiryPage() {
+import { redirect } from "next/navigation";
+
+import { InquiryForm } from "@/components/domain/inquiry/inquiry-form";
+import { routes } from "@/lib/constants/routes";
+
+export default function InquiryPage({
+  searchParams,
+}: {
+  searchParams: { product?: string };
+}) {
+  const productId = searchParams.product;
+  if (!productId) {
+    redirect(routes.products);
+  }
+
   return (
     <main className="flex-1">
       <section className="border-b border-border bg-background py-12">
@@ -17,12 +31,7 @@ export default function InquiryPage() {
       <section className="py-12">
         <div className="mx-auto max-w-3xl px-6">
           <Suspense fallback={<InquiryFormSkeleton />}>
-            {/* TODO: InquiryForm 컴포넌트 구현 필요 */}
-            <div className="rounded-lg border border-border bg-card p-8">
-              <p className="text-muted-foreground">
-                Inquiry form will be implemented here.
-              </p>
-            </div>
+            <InquiryForm productId={productId} />
           </Suspense>
         </div>
       </section>

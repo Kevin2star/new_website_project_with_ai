@@ -2,21 +2,32 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
 
+import { env } from "@/lib/constants/config";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { routes } from "@/lib/constants/routes";
+
 export default function LoginPage() {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
-    // TODO: Supabase Auth를 통한 Google OAuth 구현
-    // Simulate Google OAuth flow
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    // In production, this would redirect to Google OAuth
-    router.push("/");
+    const supabase = createSupabaseBrowserClient();
+
+    const redirectTo = `${env.appUrl || window.location.origin}/api/auth/callback`;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo },
+    });
+
+    if (error) {
+      // 로그인 실패 시 즉시 복구 가능하도록 상태만 되돌림
+      console.error(error);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -100,7 +111,7 @@ export default function LoginPage() {
 
           <div className="mt-6 text-center">
             <Link
-              href="/"
+              href={routes.home}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="h-4 w-4" />

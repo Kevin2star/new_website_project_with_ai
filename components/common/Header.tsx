@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
 
+import { LoginButton } from "@/components/domain/auth/login-button";
+import { UserMenu } from "@/components/domain/auth/user-menu";
+import { useAuth } from "@/hooks/use-auth";
+
 export function Header() {
   const pathname = usePathname();
+  const { user, isLoading } = useAuth();
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -46,9 +50,11 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
+          {isLoading ? null : user ? (
+            <UserMenu displayName={user.user_metadata?.name ?? user.email ?? "User"} />
+          ) : (
+            <LoginButton nextPath={pathname} />
+          )}
         </div>
       </div>
     </header>

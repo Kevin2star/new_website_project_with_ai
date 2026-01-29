@@ -55,6 +55,7 @@ export interface Database {
           updated_at?: string;
         };
         Update: Partial<Omit<UserRow, "id">>;
+        Relationships: [];
       };
       products: {
         Row: ProductRow;
@@ -66,6 +67,7 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Omit<ProductRow, "id">>;
+        Relationships: [];
       };
       inquiries: {
         Row: InquiryRow;
@@ -75,7 +77,12 @@ export interface Database {
           updated_at?: string;
         };
         Update: InquiryUpdate;
+        Relationships: [];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 }

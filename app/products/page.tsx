@@ -1,6 +1,11 @@
 import { Suspense } from "react";
 
-export default function ProductsPage() {
+import { getProducts } from "@/app/actions/products";
+import { ProductList } from "@/components/domain/product/product-list";
+
+export default async function ProductsPage() {
+  const products = await getProducts();
+
   return (
     <main className="flex-1">
       <section className="border-b border-border bg-background py-12">
@@ -17,12 +22,7 @@ export default function ProductsPage() {
       <section className="py-12">
         <div className="mx-auto max-w-6xl px-6">
           <Suspense fallback={<ProductGridSkeleton />}>
-            {/* TODO: ProductGrid 컴포넌트 구현 필요 */}
-            <div className="rounded-lg border border-border bg-card p-8">
-              <p className="text-muted-foreground">
-                Product grid will be implemented here.
-              </p>
-            </div>
+            <ProductList products={products} />
           </Suspense>
         </div>
       </section>

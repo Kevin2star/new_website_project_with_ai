@@ -2,11 +2,40 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function proxy(request: NextRequest) {
-  // 현재는 기본 통과만 구현
-  // 향후 인증 체크 로직 추가 예정
-  void request;
-  return NextResponse.next();
+import { routes } from "@/lib/constants/routes";
+import { createSupabaseMiddlewareClient } from "@/lib/supabase/middleware";
+
+function isProtectedPath(pathname: string) {
+  return pathname.startsWith(routes.myPage);
+}
+
+function isExcludedPath(pathname: string) {
+  if (pathname.startsWith(routes.login)) return true;
+  return false;
+}
+
+export async function proxy(request: NextRequest) {
+  const { supabase, response } = createSupabaseMiddlewareClient(request);
+
+  // 세션 갱신 + 유저 확인 (쿠키 refresh 포함)
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { pathname } = request.nextUrl;
+
+  if (isExcludedPath(pathname)) {
+    return response;
+  }
+
+  if (isProtectedPath(pathname) && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = routes.login;
+    url.searchParams.set("next", pathname);
+    return NextResponse.redirect(url);
+  }
+
+  return response;
 }
 
 export const config = {

@@ -79,34 +79,34 @@
 
 ## 체크리스트 (컨펌용)
 
-- [ ] **1.1** Supabase 클라이언트 (client / server / middleware)
-- [ ] **1.2** 환경 변수·config
-- [ ] **1.3** 라우트 상수
-- [ ] **1.4** Row ↔ Domain 변환
-- [ ] **1.5** Validation (zod)
-- [ ] **1.6** Format 유틸
-- [ ] **2.1** Google OAuth 로그인
-- [ ] **2.2** OAuth 콜백 → User upsert
-- [ ] **2.3** 미들웨어 세션·보호
-- [ ] **2.4** Products fetch (목록)
-- [ ] **2.5** 제품 리스트 페이지 바인딩
-- [ ] **2.6** Product 단건 fetch → 상세 바인딩
-- [ ] **2.7** Inquiry INSERT
-- [ ] **2.8** AI 응답 생성
-- [ ] **2.9** Inquiry UPDATE (ai_response)
-- [ ] **2.10** 문의 플로우 오케스트레이션
-- [ ] **2.11** 문의 폼 → 제출 → 결과 바인딩
-- [ ] **2.12** My inquiries fetch
-- [ ] **2.13** 마이페이지 목록 바인딩
-- [ ] **2.14** Inquiry DELETE
-- [ ] **2.15** 마이페이지 삭제 연동
-- [ ] **3.1** Auth 상태·Header/UserMenu
-- [ ] **3.2** 제품 리스트 로딩/에러/빈 상태
-- [ ] **3.3** 제품 상세 로딩/404
-- [ ] **3.4** 문의 폼 로딩/에러/재시도
-- [ ] **3.5** 마이페이지 로딩/빈/삭제 확인
-- [ ] **3.6** 대시보드 인증 체크
-- [ ] **3.7** API 라우트 정리 (선택)
+- [x] **1.1** Supabase 클라이언트 (client / server / middleware)
+- [x] **1.2** 환경 변수·config
+- [x] **1.3** 라우트 상수
+- [x] **1.4** Row ↔ Domain 변환
+- [x] **1.5** Validation (zod)
+- [x] **1.6** Format 유틸
+- [x] **2.1** Google OAuth 로그인
+- [x] **2.2** OAuth 콜백 → User upsert
+- [x] **2.3** 미들웨어 세션·보호
+- [x] **2.4** Products fetch (목록)
+- [x] **2.5** 제품 리스트 페이지 바인딩
+- [x] **2.6** Product 단건 fetch → 상세 바인딩
+- [x] **2.7** Inquiry INSERT
+- [x] **2.8** AI 응답 생성
+- [x] **2.9** Inquiry UPDATE (ai_response)
+- [x] **2.10** 문의 플로우 오케스트레이션
+- [x] **2.11** 문의 폼 → 제출 → 결과 바인딩
+- [x] **2.12** My inquiries fetch
+- [x] **2.13** 마이페이지 목록 바인딩
+- [x] **2.14** Inquiry DELETE
+- [x] **2.15** 마이페이지 삭제 연동
+- [x] **3.1** Auth 상태·Header/UserMenu
+- [x] **3.2** 제품 리스트 로딩/에러/빈 상태
+- [x] **3.3** 제품 상세 로딩/404
+- [x] **3.4** 문의 폼 로딩/에러/재시도
+- [x] **3.5** 마이페이지 로딩/빈/삭제 확인
+- [x] **3.6** 대시보드 인증 체크
+- [x] **3.7** API 라우트 정리 (선택)
 
 ---
 
@@ -162,38 +162,38 @@
 
 ```
 Phase 1
-- [ ] 1.1 Supabase client/server/middleware 구현 및 검증
-- [ ] 1.2 env·config 구현 및 검증
-- [ ] 1.3 routes 상수 구현 및 검증
-- [ ] 1.4 Row↔Domain 변환 구현 및 검증
-- [ ] 1.5 zod validation 구현 및 검증
-- [ ] 1.6 format 유틸 구현 및 검증
+- [x] 1.1 Supabase client/server/middleware 구현 및 검증
+- [x] 1.2 env·config 구현 및 검증
+- [x] 1.3 routes 상수 구현 및 검증
+- [x] 1.4 Row↔Domain 변환 구현 및 검증
+- [x] 1.5 zod validation 구현 및 검증
+- [x] 1.6 format 유틸 구현 및 검증
 
 Phase 2
-- [ ] 2.1 Google OAuth 로그인 구현 및 검증
-- [ ] 2.2 OAuth 콜백 → User upsert 구현 및 검증
-- [ ] 2.3 미들웨어 세션·보호 구현 및 검증
-- [ ] 2.4 getProducts 구현 및 검증
-- [ ] 2.5 제품 리스트 페이지 바인딩 구현 및 검증
-- [ ] 2.6 getProductById·상세 바인딩 구현 및 검증
-- [ ] 2.7 createInquiry 구현 및 검증
-- [ ] 2.8 AI 응답 생성 구현 및 검증
-- [ ] 2.9 updateInquiryAiResponse 구현 및 검증
-- [ ] 2.10 submitInquiry 오케스트레이션 구현 및 검증
-- [ ] 2.11 문의 폼·제출·결과 바인딩 구현 및 검증
-- [ ] 2.12 getMyInquiries 구현 및 검증
-- [ ] 2.13 마이페이지 목록 바인딩 구현 및 검증
-- [ ] 2.14 deleteInquiry 구현 및 검증
-- [ ] 2.15 마이페이지 삭제 연동 구현 및 검증
+- [x] 2.1 Google OAuth 로그인 구현 및 검증
+- [x] 2.2 OAuth 콜백 → User upsert 구현 및 검증
+- [x] 2.3 미들웨어 세션·보호 구현 및 검증
+- [x] 2.4 getProducts 구현 및 검증
+- [x] 2.5 제품 리스트 페이지 바인딩 구현 및 검증
+- [x] 2.6 getProductById·상세 바인딩 구현 및 검증
+- [x] 2.7 createInquiry 구현 및 검증
+- [x] 2.8 AI 응답 생성 구현 및 검증
+- [x] 2.9 updateInquiryAiResponse 구현 및 검증
+- [x] 2.10 submitInquiry 오케스트레이션 구현 및 검증
+- [x] 2.11 문의 폼·제출·결과 바인딩 구현 및 검증
+- [x] 2.12 getMyInquiries 구현 및 검증
+- [x] 2.13 마이페이지 목록 바인딩 구현 및 검증
+- [x] 2.14 deleteInquiry 구현 및 검증
+- [x] 2.15 마이페이지 삭제 연동 구현 및 검증
 
 Phase 3
-- [ ] 3.1 use-auth·AuthProvider·Header/UserMenu 구현 및 검증
-- [ ] 3.2 제품 리스트 로딩/에러/빈 상태 구현 및 검증
-- [ ] 3.3 제품 상세 로딩/404 구현 및 검증
-- [ ] 3.4 문의 폼 로딩/에러/재시도 구현 및 검증
-- [ ] 3.5 마이페이지 로딩/빈/삭제 확인 구현 및 검증
-- [ ] 3.6 대시보드 인증 체크 구현 및 검증
-- [ ] 3.7 API 라우트 정리 (선택) 구현 및 검증
+- [x] 3.1 use-auth·AuthProvider·Header/UserMenu 구현 및 검증
+- [x] 3.2 제품 리스트 로딩/에러/빈 상태 구현 및 검증
+- [x] 3.3 제품 상세 로딩/404 구현 및 검증
+- [x] 3.4 문의 폼 로딩/에러/재시도 구현 및 검증
+- [x] 3.5 마이페이지 로딩/빈/삭제 확인 구현 및 검증
+- [x] 3.6 대시보드 인증 체크 구현 및 검증
+- [x] 3.7 API 라우트 정리 (선택) 구현 및 검증
 ```
 
 ---
