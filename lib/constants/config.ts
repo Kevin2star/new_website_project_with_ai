@@ -1,11 +1,18 @@
 // 앱 설정 상수
 
-function requirePublicEnv(name: string): string {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value;
+// ⚠️ 주의: 브라우저 번들에서는 `process.env[name]` 같은
+// 동적 접근이 동작하지 않는다. (Next.js는 정적 키만 치환)
+// 따라서 공개용 환경변수는 정적 프로퍼티로 읽어야 한다.
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl) {
+  throw new Error("Missing required environment variable: NEXT_PUBLIC_SUPABASE_URL");
+}
+
+if (!supabaseAnonKey) {
+  throw new Error("Missing required environment variable: NEXT_PUBLIC_SUPABASE_ANON_KEY");
 }
 
 /**
@@ -14,8 +21,8 @@ function requirePublicEnv(name: string): string {
  */
 export const env = {
   appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "",
-  supabaseUrl: requirePublicEnv("NEXT_PUBLIC_SUPABASE_URL"),
-  supabaseAnonKey: requirePublicEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
+  supabaseUrl,
+  supabaseAnonKey,
 } as const;
 
 export function getServerEnv() {
