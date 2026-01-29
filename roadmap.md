@@ -2,7 +2,7 @@
 
 **목적**: PRD·FLOW·기존 문서/소스 분석을 바탕으로, **Supabase SDK** 및 **Google OAuth** 중심의 실제 구현 단계를 정리한 로드맵.
 
-**기준 문서**: `docs/PRD.md`, `docs/FLOW.md`, `supabase/migrations/0001_initial_schema_rls.sql`, `types/*`, `lib/supabase/*`, `app/api/auth/callback`, `app/(auth)/login`, `.env.example`
+**기준 문서**: `PRD.md`, `FLOW.md`, `supabase/migrations/0001_initial_schema_rls.sql`, `types/*`, `lib/supabase/*`, `app/api/auth/callback`, `app/(auth)/login`, `.env.example`
 
 ---
 

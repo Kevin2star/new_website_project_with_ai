@@ -198,4 +198,4 @@ Phase 3
 
 ---
 
-**참조**: PRD(`docs/PRD.md`), FLOW(`docs/FLOW.md`), DB 스키마(`docs/db-schema.md`), 마이그레이션(`supabase/migrations/0001_initial_schema_rls.sql`), 시드(`docs/seed_data.sql`).
+**참조**: PRD(`PRD.md`), FLOW(`FLOW.md`), DB 스키마(`docs/db-schema.md`), 마이그레이션(`supabase/migrations/0001_initial_schema_rls.sql`), 시드(`docs/seed_data.sql`).
