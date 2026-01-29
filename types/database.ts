@@ -1,1 +1,81 @@
-// Supabase DB 스키마 타입 (자동 생성 타입 사용 예정)
+// Supabase DB 스키마 타입 (스키마와 1:1, snake_case)
+// Supabase 클라이언트 제네릭 Database 타입 또는 수동 정의
+
+export interface UserRow {
+  id: string;
+  google_id: string;
+  email: string | null;
+  name: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProductRow {
+  id: string;
+  name: string;
+  category: "Carbon" | "Graphite";
+  summary: string | null;
+  description: string | null;
+  created_at: string;
+}
+
+export interface InquiryRow {
+  id: string;
+  user_id: string;
+  product_id: string;
+  content: string;
+  ai_response: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface InquiryInsert {
+  user_id: string;
+  product_id: string;
+  content: string;
+  ai_response?: string | null;
+}
+
+export interface InquiryUpdate {
+  ai_response?: string | null;
+}
+
+/** Supabase Database 타입 (클라이언트 제네릭용) */
+export interface Database {
+  public: {
+    Tables: {
+      users: {
+        Row: UserRow;
+        Insert: {
+          id: string;
+          google_id: string;
+          email?: string | null;
+          name?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Omit<UserRow, "id">>;
+      };
+      products: {
+        Row: ProductRow;
+        Insert: {
+          name: string;
+          category: "Carbon" | "Graphite";
+          summary?: string | null;
+          description?: string | null;
+          created_at?: string;
+        };
+        Update: Partial<Omit<ProductRow, "id">>;
+      };
+      inquiries: {
+        Row: InquiryRow;
+        Insert: InquiryInsert & {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: InquiryUpdate;
+      };
+    };
+  };
+}
