@@ -43,6 +43,26 @@ export interface InquiryUpdate {
   ai_response?: string | null;
 }
 
+export interface AiResponseRow {
+  id: string;
+  user_id: string | null;
+  prompt: string;
+  response: string;
+  category: string | null;
+  token_usage: any | null;
+  provider: string | null;
+  created_at: string;
+}
+
+export interface AiResponseInsert {
+  user_id?: string | null;
+  prompt: string;
+  response: string;
+  category?: string | null;
+  token_usage?: any | null;
+  provider?: string | null;
+}
+
 /** Supabase Database 타입 (클라이언트 제네릭용) */
 export interface Database {
   public: {
@@ -84,6 +104,19 @@ export interface Database {
         };
         Update: InquiryUpdate;
         Relationships: [];
+      };
+      ai_responses: {
+        Row: AiResponseRow;
+        Insert: AiResponseInsert;
+        Update: Partial<AiResponseRow>;
+        Relationships: [
+          {
+            foreignKeyName: "ai_responses_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Views: Record<string, never>;

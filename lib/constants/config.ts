@@ -29,11 +29,13 @@ export function getServerEnv() {
   // Server-only secrets (Route Handler / Server Actions에서만 사용)
   const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
   const openAiApiKey = process.env.OPENAI_API_KEY ?? "";
-  const googleAiApiKey = process.env.GOOGLE_AI_API_KEY ?? "";
+  const googleAiApiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY ?? "";
+  const groqApiKey = process.env.GROQ_API_KEY ?? "";
 
   return {
     supabaseServiceRoleKey,
     openAiApiKey,
     googleAiApiKey,
+    groqApiKey,
   } as const;
 }
