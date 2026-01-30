@@ -26,24 +26,13 @@ export function Footer() {
             <h4 className="text-sm font-semibold">Products</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link
-                  href="/products?category=carbon"
-                  className="hover:text-foreground"
-                >
-                  Carbon Products
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/products?category=graphite"
-                  className="hover:text-foreground"
-                >
-                  Graphite Products
-                </Link>
-              </li>
-              <li>
                 <Link href="/products" className="hover:text-foreground">
                   All Products
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/new" className="hover:text-foreground">
+                  Register Product
                 </Link>
               </li>
             </ul>

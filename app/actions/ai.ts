@@ -19,7 +19,7 @@ export async function generateAIResponse(content: string, productId: string) {
 
   return generateInquiryResponse(content, {
     name: product.name,
-    category: product.category,
+    productType: product.product_type,
     summary: product.summary,
     description: product.description,
   });

@@ -18,10 +18,13 @@ export function toProduct(row: ProductRow): Product {
   return {
     id: row.id,
     name: row.name,
-    category: row.category,
+    productType: row.product_type,
     summary: row.summary,
     description: row.description,
+    applications: row.applications ?? [],
+    specifications: row.specifications ?? {},
     createdAt: row.created_at,
+    createdBy: row.created_by,
   };
 }
 

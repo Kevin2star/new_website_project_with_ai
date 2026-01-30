@@ -15,7 +15,9 @@ export function ProductCard({ product }: { product: Product }) {
       <CardHeader className="gap-2">
         <div className="flex items-start justify-between gap-3">
           <CardTitle className="text-lg leading-snug">{product.name}</CardTitle>
-          <Badge variant="secondary">{product.category}</Badge>
+          {product.productType && (
+            <Badge variant="secondary">{product.productType}</Badge>
+          )}
         </div>
         {product.summary ? (
           <p className="text-sm text-muted-foreground">{product.summary}</p>

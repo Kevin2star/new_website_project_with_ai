@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { getProductById } from "@/app/actions/products";
+import { getUser } from "@/app/actions/auth";
 import { ProductDetail } from "@/components/domain/product/product-detail";
 
 export default async function ProductDetailPage({
@@ -10,10 +11,11 @@ export default async function ProductDetailPage({
 }) {
   const { id } = await params;
   const product = await getProductById(id);
+  const user = await getUser();
 
   if (!product) {
     notFound();
   }
 
-  return <ProductDetail product={product} />;
+  return <ProductDetail product={product} currentUserId={user?.id} />;
 }

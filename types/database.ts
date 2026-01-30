@@ -13,10 +13,13 @@ export interface UserRow {
 export interface ProductRow {
   id: string;
   name: string;
-  category: "Carbon" | "Graphite";
+  product_type: "Molded" | "Extruded" | "CIP (Isotropic)" | null;
   summary: string | null;
   description: string | null;
+  applications: string[] | null;
+  specifications: Record<string, { value: string; unit: string }> | null;
   created_at: string;
+  created_by: string;
 }
 
 export interface InquiryRow {
@@ -61,10 +64,13 @@ export interface Database {
         Row: ProductRow;
         Insert: {
           name: string;
-          category: "Carbon" | "Graphite";
+          product_type?: "Molded" | "Extruded" | "CIP (Isotropic)" | null;
           summary?: string | null;
           description?: string | null;
+          applications?: string[] | null;
+          specifications?: Record<string, { value: string; unit: string }> | null;
           created_at?: string;
+          created_by?: string;
         };
         Update: Partial<Omit<ProductRow, "id">>;
         Relationships: [];

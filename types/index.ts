@@ -1,6 +1,6 @@
 // 타입 재export
 
-export type { User, Product, Inquiry, InquiryListItem, ProductCategory } from "./domain";
+export type { User, Product, Inquiry, InquiryListItem, ProductType } from "./domain";
 export type {
   Database,
   UserRow,

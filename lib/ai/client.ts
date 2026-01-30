@@ -4,7 +4,7 @@ import { getServerEnv } from "@/lib/constants/config";
 
 type ProductContext = {
   name: string;
-  category: string;
+  productType: string | null;
   summary: string | null;
   description: string | null;
 };
@@ -15,7 +15,7 @@ function buildPrompt(content: string, product: ProductContext) {
     ``,
     `제품 정보:`,
     `- 제품명: ${product.name}`,
-    `- 카테고리: ${product.category}`,
+    `- 제품 타입: ${product.productType ?? "미지정"}`,
     `- 요약: ${product.summary ?? "없음"}`,
     `- 상세: ${product.description ?? "없음"}`,
     ``,

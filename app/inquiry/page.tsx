@@ -5,12 +5,12 @@ import { redirect } from "next/navigation";
 import { InquiryForm } from "@/components/domain/inquiry/inquiry-form";
 import { routes } from "@/lib/constants/routes";
 
-export default function InquiryPage({
+export default async function InquiryPage({
   searchParams,
 }: {
-  searchParams: { product?: string };
+  searchParams: Promise<{ product?: string }>;
 }) {
-  const productId = searchParams.product;
+  const { product: productId } = await searchParams;
   if (!productId) {
     redirect(routes.products);
   }

@@ -1,7 +1,11 @@
 import { Suspense } from "react";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 
 import { getProducts } from "@/app/actions/products";
 import { ProductList } from "@/components/domain/product/product-list";
+import { routes } from "@/lib/constants/routes";
+import { Button } from "@/components/ui/button";
 
 export default async function ProductsPage() {
   const products = await getProducts();
@@ -10,12 +14,22 @@ export default async function ProductsPage() {
     <main className="flex-1">
       <section className="border-b border-border bg-background py-12">
         <div className="mx-auto max-w-6xl px-6">
-          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Products
-          </h1>
-          <p className="mt-2 text-muted-foreground">
-            Browse our catalog of industrial carbon and graphite materials
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+                Products
+              </h1>
+              <p className="mt-2 text-muted-foreground">
+                Browse our catalog of industrial carbon and graphite materials
+              </p>
+            </div>
+            <Button asChild>
+              <Link href={routes.newProduct}>
+                <Plus className="h-4 w-4" />
+                새 제품 등록
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
